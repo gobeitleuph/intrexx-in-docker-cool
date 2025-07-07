@@ -41,7 +41,7 @@ services:
       ZK_HOST: zookeeper:${ZOOKEEPER_PORT}
     ports:
      - "${SOLR_HOST_PORT}:8983"
-    command: bash -c "bin/solr zk cp file:/tmp/security.json zk:/security.json"
+    command: bash -c "bin/solr zk cp -z zookeeper:${ZOOKEEPER_PORT} file:/tmp/security.json zk:/security.json"
     volumes:
      # security.json is world-readable --> secure?
      # The hash needs to be computed using a tool like https://github.com/ansgarwiechers/solrpasswordhash
