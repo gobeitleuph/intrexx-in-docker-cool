@@ -32,20 +32,20 @@ services:
 
 # Uploads the security.json to the zookeeper - there is actually no other way to do this
   solr-init:
-  image: solr:${SOLR_VERSION}
-  depends_on:
-    zookeeper:
-      condition: service_started
-  environment:
-    SOLR_OPTS: ${SOLR_OPTS}
-    ZK_HOST: zookeeper:${ZOOKEEPER_PORT}
-  command: >
-    bash -c "
-    while [ ! -f /tmp/security.json ]; do sleep 2; done;
-    bin/solr zk cp -z zookeeper:${ZOOKEEPER_PORT} file:/tmp/security.json zk:/security.json
-    "
-  volumes:
-    - ./resource/zookeeper:/tmp-config:ro  # Mount directory to new path
+    image: solr:${SOLR_VERSION}
+    depends_on:
+      zookeeper:
+        condition: service_started
+    environment:
+      SOLR_OPTS: ${SOLR_OPTS}
+      ZK_HOST: zookeeper:${ZOOKEEPER_PORT}
+    command: >
+      bash -c "
+      while [ ! -f /tmp/security.json ]; do sleep 2; done;
+      bin/solr zk cp -z zookeeper:${ZOOKEEPER_PORT} file:/tmp/security.json zk:/security.json
+      "
+    volumes:
+      - ./resource/zookeeper:/tmp-config:ro  # Mount directory to new path
 
 # A solr node in the "cluster"
   solr:
