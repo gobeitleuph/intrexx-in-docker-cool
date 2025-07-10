@@ -39,13 +39,13 @@ services:
     environment:
       SOLR_OPTS: ${SOLR_OPTS}
       ZK_HOST: zookeeper:${ZOOKEEPER_PORT}
-    command: >
-      bash -c "
-      while [ ! -f /tmp/security.json ]; do sleep 2; done;
-      bin/solr zk cp -z zookeeper:${ZOOKEEPER_PORT} file:/tmp/security.json zk:/security.json
-      "
+    ports:
+     - "${SOLR_HOST_PORT}:8983"
+    command: bash -c "bin/solr zk cp -z zookeeper:${ZOOKEEPER_PORT} file:/tmp/security.json zk:/security.json"
     volumes:
-      - ./resource/zookeeper:/tmp-config:ro  # Mount directory to new path
+     # security.json is world-readable --> secure?
+     # The hash needs to be computed using a tool like https://github.com/ansgarwiechers/solrpasswordhash
+     - /data/zookeeper/security.json:/tmp/security.json:ro
 
 # A solr node in the "cluster"
   solr:
