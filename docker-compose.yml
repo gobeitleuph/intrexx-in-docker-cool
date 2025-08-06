@@ -46,6 +46,7 @@ services:
      # security.json is world-readable --> secure?
      # The hash needs to be computed using a tool like https://github.com/ansgarwiechers/solrpasswordhash
      - /data/zookeeper/security.json:/tmp/security.json:ro
+    restart: "no"
 
 # A solr node in the "cluster"
   solr:
@@ -97,6 +98,7 @@ services:
       - intrexx-cfg:/opt/intrexx/cfg
 #      - ${IX_PORTAL_DIR_HOST}:/opt/intrexx/org
 #      - ${IX_PORTAL_DIR_HOST}:${IX_PORTAL_ZIP_MNTPT}
+    restart: "no"
 
   # The Intrexx instance(s) that run the portal
   intrexx:
