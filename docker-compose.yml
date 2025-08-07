@@ -159,17 +159,17 @@ services:
 #      - "1337:1337"
 
 # Reverse proxy for standalone
- nginx:
-   depends_on:
-     - intrexx
-   image: nginx:${NGINX_VERSION}
-   restart: unless-stopped
-   ports:
-     - "80:80"
-     - "443:443"
-   volumes:
-     - ./resource/nginx/standalone/conf.d:/etc/nginx/conf.d:ro
-     - ./resource/nginx/ssl/example.unitedplanet.de:/etc/ssl/example.unitedplanet.de:ro
+#  nginx:
+#    depends_on:
+#      - intrexx
+#    image: nginx:${NGINX_VERSION}
+#    restart: unless-stopped
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    volumes:
+#      - ./resource/nginx/standalone/conf.d:/etc/nginx/conf.d:ro
+#      - ./resource/nginx/ssl/example.unitedplanet.de:/etc/ssl/example.unitedplanet.de:ro
 
 
 volumes:
